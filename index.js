@@ -22,8 +22,47 @@ app.get('/products/:productId', async (req, res) => {
     try {
         //data about specific product
         const response = await request(`${baseUrl}&url=https://www.amazon.com/dp/${productId}`);
+        // pretty json response
+        res.json(JSON.parse(response));
+    } catch (error) {
+        res.json(error);
+    }
+});
+//get product reviews
+app.get('/products/:productId/reviews', async (req, res) => {
+    const {productId} = req.params
 
-        res.json(response);
+    try {
+        //data about specific product
+        const response = await request(`${baseUrl}&url=https://www.amazon.com/product-reviews/${productId}`);
+        // pretty json response
+        res.json(JSON.parse(response));
+    } catch (error) {
+        res.json(error);
+    }
+});
+//get product offers
+app.get('/products/:productId/offers', async (req, res) => {
+    const {productId} = req.params
+
+    try {
+        //data about specific product
+        const response = await request(`${baseUrl}&url=https://www.amazon.com/gp/offer-listing/${productId}`);
+        // pretty json response
+        res.json(JSON.parse(response));
+    } catch (error) {
+        res.json(error);
+    }
+});
+//get search results
+app.get('/search/:searchQuery', async (req, res) => {
+    const {searchQuery} = req.params
+
+    try {
+        //data about specific product
+        const response = await request(`${baseUrl}&url=https://www.amazon.com/s?k=${searchQuery}`);
+        // pretty json response
+        res.json(JSON.parse(response));
     } catch (error) {
         res.json(error);
     }
